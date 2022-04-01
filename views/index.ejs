@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+<body>
+    <h1>Books</h1>
+    <% for (let book of books) { %>
+        <div style = 'border: 1px solid black; margin-bottom: 20px;'>
+            <h3><%= book.title %></h3>
+            <p>
+                <strong>Author: </strong><%= book.authors %>
+            </p>
+            <p><strong>ISBN: </strong><%= book.isbn %></p>
+            <p><strong>Description: </strong> <%= book.description %></p>
+        </div>
+    <% } %>
+    
+    <h1>Magazines</h1>
+    <% for (let mag of magazines) { %>
+        <div style = 'border: 1px solid black; margin-bottom: 20px;'>
+            <h3><%= mag.title %></h3>
+            <p>
+                <strong>Author: </strong><%= mag.authors %>
+            </p>
+            <p><strong>ISBN: </strong><%= mag.isbn %></p>
+            <p><strong>Pubhlished At: </strong><%= mag.publishAt %></p>
+        </div>
+    <% } %>
+    <br>
+    <br>
+    <p>Find book or magazine by isbn number:-</p>
+    <form action = '/' method = 'POST'>
+        <input type = 'text' name = 'find'>
+        <br/>
+        <button type = 'submit'>Find</button>
+    </form>
+    <h2 style = 'margin-left: 50%;'>Result</h2>
+    <% if(find && find !== 'not found') { %>
+        <div style = 'border: 1px solid black; margin-bottom: 20px;'>
+            <h3><%= find.title %></h3>
+            <p>
+                <strong>Author: </strong><%= find.authors %>
+            </p>
+            <p><strong>ISBN: </strong><%= find.isbn %></p>
+        </div>
+    <% } else if (find === 'not found'){ %>
+        <p>not found</p>
+    <% } %>
+
+    <br>
+    <br>
+    <p>Find book or magazine by author email:-</p>
+    <form action = '/by-email' method = 'POST'>
+        <input type = 'email' name = 'email'>
+        <br/>
+        <button type = 'submit'>Find</button>
+    </form>
+    <h2 style = 'margin-left: 50%;'>Result</h2>
+    <% if(status && status !== 'not found') { %>
+        <h2>Books</h2>
+        <% for (let book of foundBooks) { %>
+            <div style = 'border: 1px solid black; margin-bottom: 20px;'>
+                <h3><%= book.title %></h3>
+                <p>
+                    <strong>Author: </strong><%= book.authors %>
+                </p>
+                <p><strong>ISBN: </strong><%= book.isbn %></p>
+                <p><strong>Description: </strong> <%= book.description %></p>
+            </div>
+        <% } %>
+        
+        <h2>Magazines</h2>
+        <% for (let mag of foundMagazines) { %>
+            <div style = 'border: 1px solid black; margin-bottom: 20px;'>
+                <h3><%= mag.title %></h3>
+                <p>
+                    <strong>Author: </strong><%= mag.authors %>
+                </p>
+                <p><strong>ISBN: </strong><%= mag.isbn %></p>
+                <p><strong>Pubhlished At: </strong><%= mag.publishAt %></p>
+            </div>
+        <% } %>
+    <% } else if (status === 'not found'){ %>
+        <p>not found</p>
+    <% } %>
+    <a href = '/sorted'>Click to view sorted data</a>
+    <form action = '/add/book' method = 'POST'>
+        <br/>
+        <br/>
+        <h2>Add new book</h2>
+        Title: <input type = 'text' name = 'title'>
+        <br/>
+        Email: <input type = 'email' name = 'email'>
+        <br/>
+        ISBN: <input type = text name = 'isbn'>
+        <br/>
+        Description: <input type = 'textarea' name = 'desc'>
+        <br/>
+        <button type = 'submit'>Add</button>
+    </form>
+    <form action = '/add/mag' method = 'POST'>
+        <br/>
+        <br/>
+        <h2>Add new magazine</h2>
+        Title: <input type = 'text' name = 'title'>
+        <br/>
+        Email: <input type = 'email' name = 'email'>
+        <br/>
+        ISBN: <input type = text name = 'isbn'>
+        <br/>
+        PublishAt: <input type = 'date' name = 'PublishAt'>
+        <br/>
+        <button type = 'submit'>Add</button>
+    </form>
+</body>
+</html>
